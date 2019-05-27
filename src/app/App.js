@@ -18,6 +18,7 @@ import Signup from '../user/signup/Signup';
 import { getCurrentUser } from '../util/APIUtils';
 import './App.css';
 import CaseStatus from '../setup/CaseStatus/CaseStatus';
+import PrimarySearchAppBar from '../common/header/Header';
 
 const { Content } = Layout;
 
@@ -116,11 +117,13 @@ class App extends Component {
 
     return (
       <Layout className="app-container">
-        <AppHeader isAuthenticated={this.state.isAuthenticated}
+        {/* <AppHeader isAuthenticated={this.state.isAuthenticated}
           currentUser={this.state.currentUser}
           collapsed={collapsed}
           toggleCollapsed={this.toggleCollapsed}
-          onLogout={this.handleLogout} />
+          onLogout={this.handleLogout} /> */}
+
+      <PrimarySearchAppBar></PrimarySearchAppBar>
 
         <Layout className="app-content">
           {SideBar}
