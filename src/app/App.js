@@ -6,15 +6,18 @@ import AppHeader from '../common/AppHeader';
 import LoadingIndicator from '../common/LoadingIndicator';
 import NotFound from '../common/NotFound';
 import PrivateRoute from '../common/PrivateRoute';
+import Priorities from '../common/setup/Priorities/Priorities';
 import Sidebar from '../common/sidebar/Sidebar';
 import { ACCESS_TOKEN, APP_NAME } from '../constants';
 import NewPoll from '../poll/NewPoll';
 import PollList from '../poll/PollList';
+import Religion from '../setup/Religion/Religion';
 import Login from '../user/login/Login';
 import Profile from '../user/profile/Profile';
 import Signup from '../user/signup/Signup';
 import { getCurrentUser } from '../util/APIUtils';
 import './App.css';
+import CaseStatus from '../setup/CaseStatus/CaseStatus';
 
 const { Content } = Layout;
 
@@ -79,7 +82,7 @@ class App extends Component {
     this.props.history.push(redirectTo);
 
     notification[notificationType]({
-      message: 'Polling App',
+      message: APP_NAME,
       description: description,
     });
   }
@@ -105,6 +108,8 @@ class App extends Component {
           toggleCollapsed={this.toggleCollapsed}
         />
       ]
+    }else{
+      SideBar =  []
     }
 
     const { collapsed } = this.state;
@@ -133,6 +138,9 @@ class App extends Component {
                   render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props} />}>
                 </Route>
                 <PrivateRoute authenticated={this.state.isAuthenticated} path="/poll/new" component={NewPoll} handleLogout={this.handleLogout}></PrivateRoute>
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/priorities" component={Priorities} handleLogout={this.handleLogout}></PrivateRoute>
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/religion" component={Religion} handleLogout={this.handleLogout}></PrivateRoute>
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/casestatus" component={CaseStatus} handleLogout={this.handleLogout}></PrivateRoute>
                 <Route component={NotFound}></Route>
               </Switch>
             </div>

@@ -1,4 +1,4 @@
-import { API_BASE_URL, POLL_LIST_SIZE, ACCESS_TOKEN } from '../constants';
+import { API_BASE_URL, POLL_LIST_SIZE, ACCESS_TOKEN, PRIORITY_LIST_SIZE } from '../constants';
 import jwt_decode from "jwt-decode";
 
 function getDecodedAccessToken(token) {
@@ -51,6 +51,22 @@ export function createPoll(pollData) {
     });
 }
 
+export function deletePriority(target) {
+    return request({
+        url: target.url,
+        method: 'DELETE'
+    });
+}
+
+export function updatePriority(priority, method) {
+    const url = method == 'PATCH' ? priority.url : API_BASE_URL + "/priorities/";
+    return request({
+        url: url,
+        method: method,
+        body: JSON.stringify(priority)
+    });
+}
+
 export function castVote(voteData) {
     return request({
         url: API_BASE_URL + "/polls/" + voteData.pollId + "/votes",
@@ -89,7 +105,6 @@ export function checkEmailAvailability(email) {
     });
 }
 
-
 export function getCurrentUser() {
     if (!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
@@ -98,7 +113,7 @@ export function getCurrentUser() {
     let user = getDecodedAccessToken(localStorage.getItem(ACCESS_TOKEN));
     // console.log(user['user_id'])
     return request({
-        url: API_BASE_URL + "/users/"+user['user_id'],
+        url: API_BASE_URL + "/users/" + user['user_id'],
         method: 'GET'
     });
 }
@@ -128,4 +143,33 @@ export function getUserVotedPolls(username, page, size) {
         url: API_BASE_URL + "/users/" + username + "/votes?page=" + page + "&size=" + size,
         method: 'GET'
     });
+}
+
+export function getAllPriorities() {
+    return request({
+        url: API_BASE_URL + "/priorities",
+        method: 'GET'
+    });
+}
+
+export function getAllReligions(){
+    return request({
+        url: API_BASE_URL + "/religion",
+        method: 'GET'
+    });
+}
+
+export function deleteReligion(url){
+    return request({
+        url: url,
+        method: 'DELETE'
+    })
+}
+
+export function updateReligion(data, method){
+    return request({
+        url: data.url,
+        method: method,
+        body: JSON.stringify(data)
+    })
 }

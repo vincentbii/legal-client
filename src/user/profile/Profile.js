@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import PollList from '../../poll/PollList';
-import { getUserProfile } from '../../util/APIUtils';
 import { Avatar, Tabs } from 'antd';
-import { getAvatarColor } from '../../util/Colors';
-import { formatDate } from '../../util/Helpers';
-import LoadingIndicator  from '../../common/LoadingIndicator';
-import './Profile.css';
+import React, { Component } from 'react';
+import LoadingIndicator from '../../common/LoadingIndicator';
 import NotFound from '../../common/NotFound';
 import ServerError from '../../common/ServerError';
+import { getUserProfile } from '../../util/APIUtils';
+import { getAvatarColor } from '../../util/Colors';
+import { formatDate } from '../../util/Helpers';
+import './Profile.css';
 
 const TabPane = Tabs.TabPane;
 
@@ -82,19 +81,19 @@ class Profile extends Component {
                         <div className="user-profile">
                             <div className="user-details">
                                 <div className="user-avatar">
-                                    <Avatar className="user-avatar-circle" style={{ backgroundColor: getAvatarColor(this.state.user.name)}}>
-                                        {this.state.user.name[0].toUpperCase()}
+                                    <Avatar className="user-avatar-circle" style={{ backgroundColor: getAvatarColor(this.state.user.first_name + this.state.user.last_name)}}>
+                                        {this.state.user.first_name.toUpperCase()}
                                     </Avatar>
                                 </div>
                                 <div className="user-summary">
                                     <div className="full-name">{this.state.user.name}</div>
                                     <div className="username">@{this.state.user.username}</div>
                                     <div className="user-joined">
-                                        Joined {formatDate(this.state.user.joinedAt)}
+                                        Joined {formatDate(this.state.user.date_joined)}
                                     </div>
                                 </div>
                             </div>
-                            <div className="user-poll-details">    
+                            {/* <div className="user-poll-details">    
                                 <Tabs defaultActiveKey="1" 
                                     animated={false}
                                     tabBarStyle={tabBarStyle}
@@ -107,7 +106,7 @@ class Profile extends Component {
                                         <PollList username={this.props.match.params.username} type="USER_VOTED_POLLS" />
                                     </TabPane>
                                 </Tabs>
-                            </div>  
+                            </div>   */}
                         </div>  
                     ): null               
                 }

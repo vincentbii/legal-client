@@ -1,11 +1,7 @@
+import { Dropdown, Icon, Layout, Menu } from 'antd';
 import React, { Component } from 'react';
-import {
-  Link,
-  withRouter
-} from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import './AppHeader.css';
-import pollIcon from '../poll.svg';
-import { Layout, Menu, Dropdown, Icon, Button } from 'antd';
 const Header = Layout.Header;
 
 class AppHeader extends Component {
@@ -30,11 +26,11 @@ class AppHeader extends Component {
             <Icon type="home" className="nav-icon" />
           </Link>
         </Menu.Item>,
-        <Menu.Item key="/poll/new">
-          <Link to="/poll/new">
-            <img src={pollIcon} alt="poll" className="poll-icon" />
-          </Link>
-        </Menu.Item>,
+        // <Menu.Item key="/poll/new">
+        //   <Link to="/poll/new">
+        //     <img src={pollIcon} alt="poll" className="poll-icon" />
+        //   </Link>
+        // </Menu.Item>,
         <Menu.Item key="/profile" className="profile-menu">
           <ProfileDropdownMenu
             currentUser={this.props.currentUser}

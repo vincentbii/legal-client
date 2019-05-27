@@ -1,7 +1,9 @@
 import { Icon, Layout, Menu } from 'antd';
 import 'antd/lib/menu/style/css';
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import './Sidebar.css';
+
 const { Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
@@ -22,23 +24,11 @@ class Sidebar extends Component {
             <Sider collapsible collapsed={collapsed} onCollapse={toggleCollapsed}>
                 <Menu
                     defaultSelectedKeys={['1']}
-                    defaultOpenKeys={['sub1']}
+                    defaultOpenKeys={['sub2']}
                     mode="inline"
                     theme="dark"
                     inlineCollapsed={this.state.collapsed}
                 >
-                    {/* <Menu.Item key="1">
-                        <Icon type="pie-chart" />
-                        <span>Option 1</span>
-                    </Menu.Item>
-                    <Menu.Item key="2">
-                        <Icon type="desktop" />
-                        <span>Option 2</span>
-                    </Menu.Item>
-                    <Menu.Item key="3">
-                        <Icon type="inbox" />
-                        <span>Option 3</span>
-                    </Menu.Item> */}
                     <SubMenu
                         key="sub1"
                         title={
@@ -68,11 +58,13 @@ class Sidebar extends Component {
                             <Menu.Item key="11">Option 11</Menu.Item>
                             <Menu.Item key="12">Option 12</Menu.Item>
                         </SubMenu> */}
-                        <Menu.Item key="13">Priority</Menu.Item>
+                        <Menu.Item key="13">
+                            <Link to="/priorities/">Priorities</Link>
+                        </Menu.Item>
                         <Menu.Item key="14">Request Type</Menu.Item>
-                        <Menu.Item key="15">Status</Menu.Item>
+                        <Menu.Item key="15"><Link to="/casestatus">Case Status</Link></Menu.Item>
                         <Menu.Item key="16">Department</Menu.Item>
-                        <Menu.Item key="17">Religion</Menu.Item>
+                        <Menu.Item key="17"><Link to="/religion">Religion</Link></Menu.Item>
                     </SubMenu>
                 </Menu>
             </Sider>
