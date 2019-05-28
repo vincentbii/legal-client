@@ -2,23 +2,25 @@
 import { Layout, notification } from 'antd';
 import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
-import AppHeader from '../common/AppHeader';
+import Header from '../common/header/Header';
 import LoadingIndicator from '../common/LoadingIndicator';
 import NotFound from '../common/NotFound';
 import PrivateRoute from '../common/PrivateRoute';
 import Priorities from '../common/setup/Priorities/Priorities';
+import Side from '../common/side/Side';
 import Sidebar from '../common/sidebar/Sidebar';
 import { ACCESS_TOKEN, APP_NAME } from '../constants';
 import NewPoll from '../poll/NewPoll';
-import PollList from '../poll/PollList';
+import Clients from '../clients/Client';
+import CaseStatus from '../setup/CaseStatus/CaseStatus';
 import Religion from '../setup/Religion/Religion';
 import Login from '../user/login/Login';
 import Profile from '../user/profile/Profile';
 import Signup from '../user/signup/Signup';
 import { getCurrentUser } from '../util/APIUtils';
+import clsx from 'clsx';
 import './App.css';
-import CaseStatus from '../setup/CaseStatus/CaseStatus';
-import PrimarySearchAppBar from '../common/header/Header';
+import { useStyles } from '../common/header/styles';
 
 const { Content } = Layout;
 
@@ -29,12 +31,16 @@ class App extends Component {
       currentUser: null,
       isAuthenticated: false,
       isLoading: false,
-      collapsed: true
+      collapsed: true,
+      open: false
     }
+    this.handleDrawerClose = this.handleDrawerClose.bind(this);
+    this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.loadCurrentUser = this.loadCurrentUser.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.toggleCollapsed = this.toggleCollapsed.bind(this);
+    this.showDrawer = this.showDrawer.bind(this);
     notification.config({
       placement: 'topRight',
       top: 70,
@@ -59,7 +65,7 @@ class App extends Component {
         this.setState({
           currentUser: response,
           isAuthenticated: true,
-          isLoading: false
+          isLoading: false,
         });
       }).catch(error => {
         this.setState({
@@ -97,6 +103,26 @@ class App extends Component {
     this.props.history.push("/");
   }
 
+  handleDrawerOpen() {
+    this.setState({ open: true });
+  }
+
+  handleDrawerClose() {
+    this.setState({ open: false });
+  }
+
+  showDrawer = () => {
+    this.setState({
+      open: true,
+    });
+  };
+
+  onClose = () => {
+    this.setState({
+      open: false,
+    });
+  };
+
   render() {
     if (this.state.isLoading) {
       return <LoadingIndicator />
@@ -109,29 +135,45 @@ class App extends Component {
           toggleCollapsed={this.toggleCollapsed}
         />
       ]
-    }else{
-      SideBar =  []
+    } else {
+      SideBar = []
     }
 
     const { collapsed } = this.state;
 
     return (
-      <Layout className="app-container">
+      <Layout>
         {/* <AppHeader isAuthenticated={this.state.isAuthenticated}
           currentUser={this.state.currentUser}
           collapsed={collapsed}
           toggleCollapsed={this.toggleCollapsed}
           onLogout={this.handleLogout} /> */}
 
-      <PrimarySearchAppBar></PrimarySearchAppBar>
+        <Header
+          showDrawer={this.showDrawer}
+          isAuthenticated={this.state.isAuthenticated}
+          currentUser={this.state.currentUser}
+          collapsed={collapsed}
+          toggleCollapsed={this.toggleCollapsed}
+          onLogout={this.handleLogout}
+        />
 
         <Layout className="app-content">
-          {SideBar}
+          {/* <Sidebar
+            collapsed={this.state.collapsed}
+            toggleCollapsed={this.toggleCollapsed}
+          /> */}
+          <Side
+            showDrawer={this.showDrawer}
+            open={this.state.open}
+            onClose={this.onClose}
+          />
+          {/* {SideBar} */}
           <Content className="">
             <div className="container">
               <Switch>
                 <Route exact path="/"
-                  render={(props) => <PollList isAuthenticated={this.state.isAuthenticated}
+                  render={(props) => <Clients isAuthenticated={this.state.isAuthenticated}
                     currentUser={this.state.currentUser} handleLogout={this.handleLogout} {...props} />}>
                 </Route>
                 <Route path="/login"
