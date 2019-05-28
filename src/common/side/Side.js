@@ -1,5 +1,6 @@
 import { Button, Drawer, Radio } from 'antd';
 import React from 'react';
+import SideMenu from './SideMenu';
 
 const RadioGroup = Radio.Group;
 
@@ -19,12 +20,11 @@ class Side extends React.Component {
                 title="Sidebar Menu"
                 placement={placement}
                 closable={false}
+                style={{ padding: 0 }}
                 onClose={onClose}
                 visible={open}
             >
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
+                <SideMenu />
             </Drawer>
         );
     }
