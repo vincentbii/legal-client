@@ -1,5 +1,6 @@
 import React from 'react';
 import { Menu, Icon } from 'antd';
+import { Link } from 'react-router-dom';
 
 const { SubMenu }  = Menu;
 
@@ -21,21 +22,21 @@ class SideMenu extends React.Component {
           key="sub1"
           title={
             <span>
-              <Icon type="mail" />
-              <span>Navigation One</span>
+              <Icon type="setting" />
+              <span>Setup</span>
             </span>
           }
         >
-          <Menu.ItemGroup key="g1" title="Item 1">
-            <Menu.Item key="1">Option 1</Menu.Item>
+          {/* <Menu.ItemGroup key="g1" title="Item 1"> */}
+            <Menu.Item key="1"><Link to="/nationality">Nationality</Link></Menu.Item>
             <Menu.Item key="2">Option 2</Menu.Item>
-          </Menu.ItemGroup>
+          {/* </Menu.ItemGroup> */}
           <Menu.ItemGroup key="g2" title="Item 2">
             <Menu.Item key="3">Option 3</Menu.Item>
             <Menu.Item key="4">Option 4</Menu.Item>
           </Menu.ItemGroup>
         </SubMenu>
-        <SubMenu
+        {/* <SubMenu
           key="sub2"
           title={
             <span>
@@ -50,8 +51,8 @@ class SideMenu extends React.Component {
             <Menu.Item key="7">Option 7</Menu.Item>
             <Menu.Item key="8">Option 8</Menu.Item>
           </SubMenu>
-        </SubMenu>
-        <SubMenu
+        </SubMenu> */}
+        {/* <SubMenu
           key="sub4"
           title={
             <span>
@@ -64,7 +65,7 @@ class SideMenu extends React.Component {
           <Menu.Item key="10">Option 10</Menu.Item>
           <Menu.Item key="11">Option 11</Menu.Item>
           <Menu.Item key="12">Option 12</Menu.Item>
-        </SubMenu>
+        </SubMenu> */}
       </Menu>
     );
   }

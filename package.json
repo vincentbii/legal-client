@@ -10,7 +10,7 @@
     "react": "next",
     "react-dom": "next",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^3.0.1"
+    "react-scripts": "^2.1.1"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -22,5 +22,11 @@
     "babel-plugin-import": "^1.6.5",
     "react-app-rewire-less": "^2.1.0",
     "react-app-rewired": "^1.4.1"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

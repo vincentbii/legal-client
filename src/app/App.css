@@ -1,3 +1,9 @@
 .app-content {
-  margin-top: 64px;   
+  padding-top: 64px;
+  height: 600;
+  background-color: aliceblue;
+}
+
+.app-main {
+  background-color: floralwhite;height: '100%';
 }

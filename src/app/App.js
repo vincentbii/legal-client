@@ -2,6 +2,7 @@
 import { Layout, notification } from 'antd';
 import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
+import Clients from '../clients/Client';
 import Header from '../common/header/Header';
 import LoadingIndicator from '../common/LoadingIndicator';
 import NotFound from '../common/NotFound';
@@ -11,16 +12,14 @@ import Side from '../common/side/Side';
 import Sidebar from '../common/sidebar/Sidebar';
 import { ACCESS_TOKEN, APP_NAME } from '../constants';
 import NewPoll from '../poll/NewPoll';
-import Clients from '../clients/Client';
 import CaseStatus from '../setup/CaseStatus/CaseStatus';
 import Religion from '../setup/Religion/Religion';
+import Nationalities from '../setup/Nationality/Nationalities';
 import Login from '../user/login/Login';
 import Profile from '../user/profile/Profile';
 import Signup from '../user/signup/Signup';
 import { getCurrentUser } from '../util/APIUtils';
-import clsx from 'clsx';
 import './App.css';
-import { useStyles } from '../common/header/styles';
 
 const { Content } = Layout;
 
@@ -142,13 +141,7 @@ class App extends Component {
     const { collapsed } = this.state;
 
     return (
-      <Layout>
-        {/* <AppHeader isAuthenticated={this.state.isAuthenticated}
-          currentUser={this.state.currentUser}
-          collapsed={collapsed}
-          toggleCollapsed={this.toggleCollapsed}
-          onLogout={this.handleLogout} /> */}
-
+      <Layout className="app-main">
         <Header
           showDrawer={this.showDrawer}
           isAuthenticated={this.state.isAuthenticated}
@@ -157,18 +150,12 @@ class App extends Component {
           toggleCollapsed={this.toggleCollapsed}
           onLogout={this.handleLogout}
         />
-
         <Layout className="app-content">
-          {/* <Sidebar
-            collapsed={this.state.collapsed}
-            toggleCollapsed={this.toggleCollapsed}
-          /> */}
           <Side
             showDrawer={this.showDrawer}
             open={this.state.open}
             onClose={this.onClose}
           />
-          {/* {SideBar} */}
           <Content className="">
             <div className="container">
               <Switch>
@@ -185,7 +172,8 @@ class App extends Component {
                 <PrivateRoute authenticated={this.state.isAuthenticated} path="/poll/new" component={NewPoll} handleLogout={this.handleLogout}></PrivateRoute>
                 <PrivateRoute authenticated={this.state.isAuthenticated} path="/priorities" component={Priorities} handleLogout={this.handleLogout}></PrivateRoute>
                 <PrivateRoute authenticated={this.state.isAuthenticated} path="/religion" component={Religion} handleLogout={this.handleLogout}></PrivateRoute>
-                <PrivateRoute authenticated={this.state.isAuthenticated} path="/casestatus" component={CaseStatus} handleLogout={this.handleLogout}></PrivateRoute>
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/nationality" component={Nationalities} handleLogout={this.handleLogout}></PrivateRoute>
+
                 <Route component={NotFound}></Route>
               </Switch>
             </div>
