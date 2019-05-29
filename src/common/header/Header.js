@@ -78,7 +78,7 @@ function Header(props) {
                 onClose={handleMenuClose}
             >
                 <MenuItem><Link to={`/users/${currentUser.username}`}>Profile</Link></MenuItem>
-                <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+                {/* <MenuItem onClick={handleMenuClose}>My account</MenuItem> */}
                 <MenuItem onClick={onLogout}>Logout</MenuItem>
             </Menu>
         ];

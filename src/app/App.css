@@ -1,5 +1,6 @@
 .app-content {
-  padding-top: 64px;
+  padding-top: 100px;
+  padding-bottom: 100px;
   height: 600;
   background-color: aliceblue;
 }
