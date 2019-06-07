@@ -85,7 +85,7 @@ class App extends Component {
       isAuthenticated: false
     });
 
-    this.props.history.push(redirectTo);
+    this.props.history.push('/login');
 
     notification[notificationType]({
       message: APP_NAME,
@@ -169,11 +169,11 @@ class App extends Component {
                 <Route path="/users/:username"
                   render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props} />}>
                 </Route>
-                <PrivateRoute authenticated={this.state.isAuthenticated} path="/poll/new" component={NewPoll} handleLogout={this.handleLogout}></PrivateRoute>
-                <PrivateRoute authenticated={this.state.isAuthenticated} path="/priorities" component={Priorities} handleLogout={this.handleLogout}></PrivateRoute>
-                <PrivateRoute authenticated={this.state.isAuthenticated} path="/religion" component={Religion} handleLogout={this.handleLogout}></PrivateRoute>
-                <PrivateRoute authenticated={this.state.isAuthenticated} path="/nationality" component={Nationalities} handleLogout={this.handleLogout}></PrivateRoute>
-
+                <PrivateRoute exact authenticated={this.state.isAuthenticated} path="/poll/new" component={NewPoll} handleLogout={this.handleLogout}></PrivateRoute>
+                <PrivateRoute exact authenticated={this.state.isAuthenticated} path="/priorities" component={Priorities} handleLogout={this.handleLogout}></PrivateRoute>
+                <PrivateRoute exact authenticated={this.state.isAuthenticated} path="/clients" component={Clients} handleLogout={this.handleLogout}></PrivateRoute>
+                <PrivateRoute exact authenticated={this.state.isAuthenticated} path="/nationality" component={Nationalities} handleLogout={this.handleLogout}></PrivateRoute>
+                <PrivateRoute exact authenticated={this.state.isAuthenticated} path="/religion" component={Religion} handleLogout={this.handleLogout}></PrivateRoute>
                 <Route component={NotFound}></Route>
               </Switch>
             </div>

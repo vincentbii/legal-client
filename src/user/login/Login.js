@@ -34,7 +34,6 @@ class LoginForm extends Component {
                 const loginRequest = Object.assign({}, values);
                 login(loginRequest)
                 .then(response => {
-                    // console.log(response)
                     localStorage.setItem(ACCESS_TOKEN, response.access);
                     this.props.onLogin();
                 }).catch(error => {
@@ -47,7 +46,7 @@ class LoginForm extends Component {
                         notification.error({
                             message: APP_NAME,
                             description: error.message || 'Sorry! Something went wrong. Please try again!'
-                        });                                            
+                        });
                     }
                 });
             }

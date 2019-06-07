@@ -114,9 +114,6 @@ function Header(props) {
             </Menu>
         ];
     }
-
-    console.log(currentUser)
-
     return (
         <div className={classes.grow}>
             <AppBar position="static">
