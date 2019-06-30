@@ -16,6 +16,9 @@ export const useStyles = makeStyles(theme => ({
     menu: {
         width: 200,
     },
+    margin: {
+        margin: theme.spacing(1),
+    },
     button: {
         margin: theme.spacing(1),
     },
@@ -30,16 +33,16 @@ export const useStyles = makeStyles(theme => ({
     },
     card: {
         minWidth: 275,
-      },
-      bullet: {
+    },
+    bullet: {
         display: 'inline-block',
         margin: '0 2px',
         transform: 'scale(0.8)',
-      },
-      title: {
+    },
+    title: {
         fontSize: 14,
-      },
-      pos: {
+    },
+    pos: {
         marginBottom: 12,
-      },
+    },
 }));

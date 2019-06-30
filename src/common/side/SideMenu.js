@@ -5,9 +5,6 @@ import { Link } from 'react-router-dom';
 const { SubMenu }  = Menu;
 
 class SideMenu extends React.Component {
-  // handleClick = e => {
-  //   console.log('click ', e);
-  // };
 
   render() {
     return (
@@ -30,6 +27,8 @@ class SideMenu extends React.Component {
           {/* <Menu.ItemGroup key="g1" title="Item 1"> */}
             <Menu.Item key="1"><Link to="/nationality">Nationality</Link></Menu.Item>
             <Menu.Item key="2"><Link to="/priorities">Priorities</Link></Menu.Item>
+            <Menu.Item key="3"><Link to="/jobtype">Job Types</Link></Menu.Item>
+            <Menu.Item key="4"><Link to="/department">Departments</Link></Menu.Item>
           {/* </Menu.ItemGroup> */}
           {/* <Menu.ItemGroup key="g2" title="Item 2">
             <Menu.Item key="3">Option 3</Menu.Item>

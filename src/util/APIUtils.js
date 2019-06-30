@@ -197,7 +197,7 @@ export function deleteNationality(url) {
     })
 }
 
-export function getClient() {
+export function getClients() {
     return request({
         url: API_BASE_URL + "/clients",
         method: 'GET'
@@ -217,5 +217,53 @@ export function deleteClient(url) {
     return request({
         url: url,
         method: 'DELETE'
+    })
+}
+
+export function getJobType() {
+    return request({
+        url: API_BASE_URL + "/jobtype",
+        method: 'GET'
+    });
+}
+
+export function updateJobType(data, method) {
+    const url = method == 'PATCH' ? data.url : API_BASE_URL + "/jobtype/";
+    return request({
+        url: url,
+        method: method,
+        body: JSON.stringify(data)
+    })
+}
+
+export function deleteJobType(data) {
+    return request({
+        url: API_BASE_URL + '/jobtype/deleteall/',
+        method: 'POST',
+        body: JSON.stringify(data)
+    })
+}
+
+export function getDepartment(){
+    return request({
+        url: API_BASE_URL + "/department",
+        method: 'GET'
+    });
+}
+
+export function updateDepartment(data, method) {
+    const url = method == 'PATCH' ? data.url : API_BASE_URL + "/department/";
+    return request({
+        url: url,
+        method: method,
+        body: JSON.stringify(data)
+    })
+}
+
+export function deleteDepartment(data) {
+    return request({
+        url: API_BASE_URL + '/department/',
+        method: 'POST',
+        body: JSON.stringify(data)
     })
 }

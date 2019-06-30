@@ -2,13 +2,13 @@ import MaterialTable, { MTableToolbar } from 'material-table';
 import React, { Component } from 'react';
 import {
     ViewColumn, Search, SaveAlt, Remove, LastPage, FirstPage, FilterList, Edit, DeleteOutline, Clear, ChevronLeft,
-    ChevronRight, Check, ArrowUpward, AddBox, LeakRemoveSharp
+    ChevronRight, Check, ArrowUpward, AddBox
 } from '@material-ui/icons';
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import { Switch, MuiThemeProvider, Fab } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import {Link} from 'react-router-dom';
-import { getClients, updateNationality, deleteNationality } from '../util/APIUtils';
+import { getDepartment, updateNationality, deleteNationality } from '../../util/APIUtils';
 
 const tableIcons = {
     Add: AddBox,
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-class Clients extends Component {
+class Department extends Component {
 
     constructor(props) {
         super(props);
@@ -71,45 +71,44 @@ class Clients extends Component {
 
         this.classes = useStyles;
 
-        this.loadClients = this.loadClients.bind(this);
+        this.loadDepartment = this.loadDepartment.bind(this);
+        this.addNewRow = this.addNewRow.bind(this);
     }
 
-    loadClients() {
-        getClients()
+    addNewRow() {
+        alert('Here?');
+    }
+
+    loadDepartment() {
+        getDepartment()
             .then(res => {
-                let data = res.results;
-                data.map(row=>{
-                    row.name = row.first_name + " " + row.last_name;
-                });
                 this.setState({ data: res.results });
-                console.log(data)
             })
             .catch();
     }
 
     componentDidMount() {
-        this.loadClients();
+        this.loadDepartment();
     }
 
     render() {
         return (
             <MuiThemeProvider theme={this.theme}>
                 <MaterialTable
-                    title="Clients"
+                    title="Department"
                     columns={this.state.columns}
                     components={{
                         Toolbar: props => (
                             <div>
                                 <MTableToolbar {...props} />
                                 <div style={{ padding: '0px 10px' }}>
-                                    <Fab size="small" color="primary" aria-label="Add" className={this.classes.fab}>
-                                        <Link to="/client/new"><AddIcon /></Link>
+                                    <Fab color="primary" aria-label="Add" className={this.classes.fab}>
+                                        <Link to="/department/new"><AddIcon /></Link>
                                     </Fab>
                                 </div>
                             </div>
                         ),
                     }}
-                    size='small'
                     data={this.state.data}
                     icons={tableIcons}
                     editable={{
@@ -178,4 +177,4 @@ class Clients extends Component {
     }
 }
 
-export default Clients;
+export default Department;

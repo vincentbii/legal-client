@@ -2,6 +2,7 @@
 import { Layout, notification } from 'antd';
 import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
+import AddClient from '../clients/AddClient';
 import Clients from '../clients/Client';
 import Header from '../common/header/Header';
 import LoadingIndicator from '../common/LoadingIndicator';
@@ -12,14 +13,17 @@ import Side from '../common/side/Side';
 import Sidebar from '../common/sidebar/Sidebar';
 import { ACCESS_TOKEN, APP_NAME } from '../constants';
 import NewPoll from '../poll/NewPoll';
-import CaseStatus from '../setup/CaseStatus/CaseStatus';
-import Religion from '../setup/Religion/Religion';
+import JobType from '../setup/JobType/JobType';
 import Nationalities from '../setup/Nationality/Nationalities';
+import Religion from '../setup/Religion/Religion';
 import Login from '../user/login/Login';
 import Profile from '../user/profile/Profile';
 import Signup from '../user/signup/Signup';
 import { getCurrentUser } from '../util/APIUtils';
 import './App.css';
+import AddJobType from '../setup/JobType/Add';
+import Department from '../setup/Department/Department';
+import AddDepartment from '../setup/Department/Add';
 
 const { Content } = Layout;
 
@@ -169,11 +173,18 @@ class App extends Component {
                 <Route path="/users/:username"
                   render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props} />}>
                 </Route>
+
+                <PrivateRoute exact authenticated={this.state.isAuthenticated} path="/jobtype/new" component={AddJobType} handleLogout={this.handleLogout}></PrivateRoute>
+                <PrivateRoute exact authenticated={this.state.isAuthenticated} path="/client/new" component={AddClient} handleLogout={this.handleLogout}></PrivateRoute>
                 <PrivateRoute exact authenticated={this.state.isAuthenticated} path="/poll/new" component={NewPoll} handleLogout={this.handleLogout}></PrivateRoute>
                 <PrivateRoute exact authenticated={this.state.isAuthenticated} path="/priorities" component={Priorities} handleLogout={this.handleLogout}></PrivateRoute>
                 <PrivateRoute exact authenticated={this.state.isAuthenticated} path="/clients" component={Clients} handleLogout={this.handleLogout}></PrivateRoute>
                 <PrivateRoute exact authenticated={this.state.isAuthenticated} path="/nationality" component={Nationalities} handleLogout={this.handleLogout}></PrivateRoute>
+                <PrivateRoute exact authenticated={this.state.isAuthenticated} path="/department" component={Department} handleLogout={this.handleLogout}></PrivateRoute>
+                <PrivateRoute exact authenticated={this.state.isAuthenticated} path="/department/new" component={AddDepartment} handleLogout={this.handleLogout}></PrivateRoute>
+
                 <PrivateRoute exact authenticated={this.state.isAuthenticated} path="/religion" component={Religion} handleLogout={this.handleLogout}></PrivateRoute>
+                <PrivateRoute exact authenticated={this.state.isAuthenticated} path="/jobtype" component={JobType} handleLogout={this.handleLogout}></PrivateRoute>
                 <Route component={NotFound}></Route>
               </Switch>
             </div>

@@ -120,7 +120,7 @@ class Nationalities extends Component {
                             }),
                         onRowDelete: oldData =>
                             new Promise(resolve => {
-                                deleteNationality(oldData.url)
+                                deleteNationality(oldData.id)
                                     .then(res => {
                                         console.log(res)
                                         setTimeout(() => {

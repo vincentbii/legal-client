@@ -1,115 +1,136 @@
-import React, { Component } from "react";
-import { TextField, Button, Card, CardContent, CardActions, Select, Typography, InputLabel } from '@material-ui/core';
+import { Button, TextField, Typography } from '@material-ui/core';
+import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
-import { notification } from 'antd';
 import clsx from 'clsx';
-import { useStyles } from './styles';
-import { updateClient } from "../util/APIUtils";
-import { APP_NAME } from "../constants";
+import React from 'react';
 
-class AddClient extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            first_name: '',
-            last_name: '',
-            gender: ''
+const useStyles = makeStyles(theme => ({
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    textField: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: 200,
+    },
+    dense: {
+        marginTop: 19,
+    },
+    menu: {
+        width: 200,
+    },
+}));
+
+const gender = [
+    {
+        value: 'M',
+        label: 'Male',
+    },
+    {
+        value: 'F',
+        label: 'Female',
+    },
+];
+
+export default function AddClient() {
+    const classes = useStyles();
+    const [values, setValues] = React.useState({
+        first_name: '',
+        last_name: '',
+        email: '',
+        age: '',
+        gender: ''
+    });
+
+    const handleChange = e => {
+        let id = e.target.id;
+        setValues({ ...values, [id]: e.target.value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        let form = document.getElementsByName('client_form');
+
+        let data = {};
+
+        for (let i = 0; i < form.length; i++) {
+            data['fghj']+':'+'sdfvg';
+        }
+
+        const data2 = {
+            first_name: values.first_name,
+            last_name: values.last_name
         };
-        this.classes = useStyles;
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleSubmit(event) {
-        event.preventDefault();
-        let last_name = this.state.last_name;
-        let first_name = this.state.first_name;
-        let initials = first_name[0] + last_name[0];
-        const data = {
-            first_name: first_name,
-            last_name: last_name,
-            gender: this.state.gender,
-            initials: initials
-        };
-
-        updateClient(data, 'POST')
-            .then(res => {
-                console.log(res);
-            })
-            .catch(error => {
-                notification.error({
-                    message: APP_NAME,
-                    description: error.messages[0]['message'] || 'Sorry! Something went wrong. Please try again!'
-                });
-            });
-
         console.log(data);
+        console.log(data2);
     }
 
-    handleChange(event) {
-        let name = event.target.name;
-        this.setState({ [name]: event.target.value });
-    }
+    return (
+        <form onSubmit={handleSubmit} className={classes.container} noValidate autoComplete="off">
 
+            <Typography>
 
-    render() {
-        return (
-            <div>
-                <Card className={this.classes.card}>
-                    <form onSubmit={this.handleSubmit} className={this.classes.container} noValidate autoComplete="off">
-                        <CardContent>
-                            <Typography>
-                                <TextField
-                                    id="first_name"
-                                    name="first_name"
-                                    label="First Name"
-                                    className={this.classes.textField}
-                                    // value={values.name}
-                                    onChange={this.handleChange}
-                                    margin="normal"
-                                />
+                <TextField
+                    required
+                    id="first_name"
+                    name="client_form"
+                    label="First Name"
+                    onChange={handleChange}
+                    className={clsx(classes.textField, classes.dense)}
+                    margin="dense"
+                />
 
-                                <TextField
-                                    id="last-name"
-                                    label="Last Name"
-                                    name="last_name"
-                                    className={this.classes.textField}
-                                    // value={values.name}
-                                    onChange={this.handleChange}
-                                    margin="normal"
-                                />
-                            </Typography>
+                <TextField
+                    required
+                    id="last_name"
+                    name="client_form"
+                    label="Last Name"
+                    onChange={handleChange}
+                    className={clsx(classes.textField, classes.dense)}
+                    margin="dense"
+                />
+                <TextField
+                    id="email"
+                    name="client_form"
+                    label="Email Address"
+                    placeholder="admin@example.com"
+                    onChange={handleChange}
+                    className={clsx(classes.textField, classes.dense)}
+                    margin="dense"
+                />
+                <TextField
+                    id="gender"
+                    name="client_form"
+                    select
+                    label="Select"
+                    className={classes.textField}
+                    value={values.gender}
+                    onChange={handleChange}
+                    SelectProps={{
+                        MenuProps: {
+                            className: classes.menu,
+                        },
+                    }}
+                    helperText="Please select Gender"
+                    margin="normal"
+                >
+                    {gender.map(option => (
+                        <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                        </MenuItem>
+                    ))}
+                </TextField>
+            </Typography>
+            <Typography>
 
-                            <Typography>
-                                <InputLabel htmlFor="gender">Gender</InputLabel>
-                                <Select
-                                    native
-                                    label='Gender'
-                                    // value={state.age}
-                                    onChange={this.handleChange}
-                                    inputProps={{
-                                        name: 'gender',
-                                        id: 'gender',
-                                    }}
-                                >
-                                    <option value="" />
-                                    <option value='M'>Male</option>
-                                    <option value='F'>Female</option>
-                                </Select>
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Button type="submit" variant="contained" color="primary" size="small" className={this.classes.button}>
-                                <SaveIcon className={clsx(this.classes.leftIcon, this.classes.iconSmall)} />
-                                Save
-                            </Button>
-                        </CardActions>
+                <Button type="submit" variant="contained" color="secondary" size="small">
+                    <SaveIcon className={clsx(classes.leftIcon, classes.iconSmall)} />Save
+                </Button>
 
-                    </form>
-                </Card>
-            </div>
-        )
-    }
+            </Typography>
+
+        </form>
+    );
 }
-
-export default AddClient;

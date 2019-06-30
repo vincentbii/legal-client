@@ -1,7 +1,7 @@
 .app-content {
-  padding-top: 80px;
-  padding-bottom: 100px;
-  height: 600;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  height: auto;
   background-color: aliceblue;
 }
 

@@ -4,7 +4,7 @@ import Poll from './Poll';
 import { castVote } from '../util/APIUtils';
 import LoadingIndicator  from '../common/LoadingIndicator';
 import { Button, Icon, notification } from 'antd';
-import { POLL_LIST_SIZE } from '../constants';
+import { POLL_LIST_SIZE, APP_NAME } from '../constants';
 import { withRouter } from 'react-router-dom';
 import './PollList.css';
 
@@ -108,7 +108,7 @@ class PollList extends Component {
         if(!this.props.isAuthenticated) {
             this.props.history.push("/login");
             notification.info({
-                message: 'Polling App',
+                message: APP_NAME,
                 description: "Please login to vote.",          
             });
             return;
@@ -134,7 +134,7 @@ class PollList extends Component {
                 this.props.handleLogout('/login', 'error', 'You have been logged out. Please login to vote');    
             } else {
                 notification.error({
-                    message: 'Polling App',
+                    message: APP_NAME,
                     description: error.message || 'Sorry! Something went wrong. Please try again!'
                 });                
             }
