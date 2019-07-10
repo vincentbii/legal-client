@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { Button, CardActions, CardContent, TextField, Typography } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
+import { makeStyles } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
-import { CardActions, CardContent, Button, Typography, TextField } from '@material-ui/core';
-import { updateJobType, updateDepartment } from '../../util/APIUtils';
 import { notification } from 'antd';
+import React, { Component } from 'react';
 import { APP_NAME } from "../../constants";
+import { updateDepartment } from '../../util/APIUtils';
 
 const useStyles = makeStyles(theme => ({
     card: {

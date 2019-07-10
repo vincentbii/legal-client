@@ -13,6 +13,9 @@ import Side from '../common/side/Side';
 import Sidebar from '../common/sidebar/Sidebar';
 import { ACCESS_TOKEN, APP_NAME } from '../constants';
 import NewPoll from '../poll/NewPoll';
+import AddDepartment from '../setup/Department/Add';
+import Department from '../setup/Department/Department';
+import AddJobType from '../setup/JobType/Add';
 import JobType from '../setup/JobType/JobType';
 import Nationalities from '../setup/Nationality/Nationalities';
 import Religion from '../setup/Religion/Religion';
@@ -21,9 +24,6 @@ import Profile from '../user/profile/Profile';
 import Signup from '../user/signup/Signup';
 import { getCurrentUser } from '../util/APIUtils';
 import './App.css';
-import AddJobType from '../setup/JobType/Add';
-import Department from '../setup/Department/Department';
-import AddDepartment from '../setup/Department/Add';
 
 const { Content } = Layout;
 
@@ -130,7 +130,7 @@ class App extends Component {
     if (this.state.isLoading) {
       return <LoadingIndicator />
     }
-    let SideBar = [];
+    let SideBar;
     if (this.state.isAuthenticated) {
       SideBar = [
         <Sidebar

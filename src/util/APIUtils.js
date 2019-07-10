@@ -1,6 +1,5 @@
-import { API_BASE_URL, POLL_LIST_SIZE, ACCESS_TOKEN, PRIORITY_LIST_SIZE } from '../constants';
 import jwt_decode from "jwt-decode";
-import { func } from 'prop-types';
+import { ACCESS_TOKEN, API_BASE_URL, POLL_LIST_SIZE } from '../constants';
 
 function getDecodedAccessToken(token) {
     try {
@@ -60,7 +59,7 @@ export function deletePriority(target) {
 }
 
 export function updatePriority(priority, method) {
-    const url = method == 'PATCH' ? priority.url : API_BASE_URL + "/priorities/";
+    const url = method === 'PATCH' ? priority.url : API_BASE_URL + "/priorities/";
     return request({
         url: url,
         method: method,
@@ -182,7 +181,7 @@ export function getNationalities() {
 }
 
 export function updateNationality(data, method) {
-    const url = method == 'PATCH' ? data.url : API_BASE_URL + "/nationality/";
+    const url = method === 'PATCH' ? data.url : API_BASE_URL + "/nationality/";
     return request({
         url: url,
         method: method,
@@ -205,7 +204,7 @@ export function getClients() {
 }
 
 export function updateClient(data, method) {
-    const url = method == 'PATCH' ? data.url : API_BASE_URL + "/clients/";
+    const url = method === 'PATCH' ? data.url : API_BASE_URL + "/clients/";
     return request({
         url: url,
         method: method,
@@ -228,7 +227,7 @@ export function getJobType() {
 }
 
 export function updateJobType(data, method) {
-    const url = method == 'PATCH' ? data.url : API_BASE_URL + "/jobtype/";
+    const url = method === 'PATCH' ? data.url : API_BASE_URL + "/jobtype/";
     return request({
         url: url,
         method: method,
@@ -252,7 +251,7 @@ export function getDepartment(){
 }
 
 export function updateDepartment(data, method) {
-    const url = method == 'PATCH' ? data.url : API_BASE_URL + "/department/";
+    const url = method === 'PATCH' ? data.url : API_BASE_URL + "/department/";
     return request({
         url: url,
         method: method,

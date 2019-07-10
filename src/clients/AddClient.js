@@ -1,4 +1,4 @@
-import { Button, TextField, Typography } from '@material-ui/core';
+import { Button, TextField, Typography, InputLabel, Select, FormControl } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
@@ -47,6 +47,7 @@ export default function AddClient() {
     const handleChange = e => {
         let id = e.target.id;
         setValues({ ...values, [id]: e.target.value });
+        console.log(id + '<>' + e.target.value);
     };
 
     const handleSubmit = (e) => {
@@ -56,15 +57,13 @@ export default function AddClient() {
         let data = {};
 
         for (let i = 0; i < form.length; i++) {
-            data['fghj']+':'+'sdfvg';
+            let id = form[i].id;
+            let value = form[i].value;
+            data[id] = value;
         }
 
-        const data2 = {
-            first_name: values.first_name,
-            last_name: values.last_name
-        };
         console.log(data);
-        console.log(data2);
+
     }
 
     return (
@@ -100,28 +99,21 @@ export default function AddClient() {
                     className={clsx(classes.textField, classes.dense)}
                     margin="dense"
                 />
-                <TextField
-                    id="gender"
-                    name="client_form"
-                    select
-                    label="Select"
-                    className={classes.textField}
-                    value={values.gender}
-                    onChange={handleChange}
-                    SelectProps={{
-                        MenuProps: {
-                            className: classes.menu,
-                        },
-                    }}
-                    helperText="Please select Gender"
-                    margin="normal"
-                >
-                    {gender.map(option => (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                        </MenuItem>
-                    ))}
-                </TextField>
+                <FormControl className={clsx(classes.textField, classes.dense)}>
+                    <InputLabel htmlFor="gender">Gender</InputLabel>
+                    <Select
+                        native
+                        onChange={handleChange}
+                        inputProps={{
+                            name: 'client_form',
+                            id: 'gender',
+                        }}
+                    >
+                        <option value="" />
+                        <option value='M'>Make</option>
+                        <option value='F'>Female</option>
+                    </Select>
+                </FormControl>
             </Typography>
             <Typography>
 

@@ -2,7 +2,7 @@ import MaterialTable, { MTableToolbar } from 'material-table';
 import React, { Component } from 'react';
 import {
     ViewColumn, Search, SaveAlt, Remove, LastPage, FirstPage, FilterList, Edit, DeleteOutline, Clear, ChevronLeft,
-    ChevronRight, Check, ArrowUpward, AddBox, LeakRemoveSharp
+    ChevronRight, Check, ArrowUpward, AddBox
 } from '@material-ui/icons';
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import { Switch, MuiThemeProvider, Fab } from '@material-ui/core';
@@ -79,7 +79,7 @@ class Clients extends Component {
             .then(res => {
                 let data = res.results;
                 data.map(row=>{
-                    row.name = row.first_name + " " + row.last_name;
+                    return row.name = row.first_name + " " + row.last_name;
                 });
                 this.setState({ data: res.results });
                 console.log(data)
@@ -89,6 +89,17 @@ class Clients extends Component {
 
     componentDidMount() {
         this.loadClients();
+    }
+
+    componentDidUpdate(nextProps) {
+        if(this.props.isAuthenticated !== nextProps.isAuthenticated) {
+            // Reset State
+            this.setState({
+                data: [],
+                isLoading: false
+            });    
+            this.loadClients();
+        }
     }
 
     render() {

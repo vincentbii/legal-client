@@ -1,8 +1,6 @@
-import { Button, Drawer, Radio } from 'antd';
+import { Drawer, Radio } from 'antd';
 import React from 'react';
 import SideMenu from './SideMenu';
-
-const RadioGroup = Radio.Group;
 
 class Side extends React.Component {
 
